@@ -1,0 +1,1 @@
+Put your photo, CV and QA samples here. Use the file names from index.html or update paths.
