@@ -68,8 +68,8 @@
   ],
   [
     "⬇️ Download CV",
-    "⬇️ Скачать резюме (EN)",
-    "⬇️ 이력서 다운로드 (EN)"
+    "⬇️ Скачать резюме",
+    "⬇️ 이력서 다운로드"
   ],
   [
     "📍 Serbia",
@@ -457,10 +457,13 @@
  const buttons=Array.from(selector.querySelectorAll("button[data-lang]"));
  const supported=["en","ru","ko"],indices={en:0,ru:1,ko:2},storageKey="qa-portfolio-language";
  const elements=Array.from(doc.querySelectorAll("[data-i18n]"));
+ const documents={"cv":["assets/Vitalii_Savonenko_CV_EN.pdf","assets/Vitalii_Savonenko_CV_RU.pdf","assets/Vitalii_Savonenko_CV_KO.pdf"]};
+ const documentLinks=Array.from(doc.querySelectorAll("a[data-document]"));
  const attributes=["content","aria-label","alt"].flatMap(name=>Array.from(doc.querySelectorAll("[data-i18n-"+name+"]")).map(el=>({el,name,key:el.getAttribute("data-i18n-"+name)})));
  function apply(lang){if(!supported.includes(lang))lang="en";const i=indices[lang];
    elements.forEach(el=>{const row=rows[Number(el.getAttribute("data-i18n"))];if(row)el.textContent=row[i];});
    attributes.forEach(({el,name,key})=>{const row=rows[Number(key)];if(row)el.setAttribute(name,row[i]);});
+   documentLinks.forEach(link=>{const files=documents[link.getAttribute("data-document")];if(files)link.setAttribute("href",files[i]);});
    doc.documentElement.lang=lang;buttons.forEach(button=>button.setAttribute("aria-pressed",String(button.getAttribute("data-lang")===lang)));return lang;
  }
  let initial="en";try{const saved=win.localStorage.getItem(storageKey);if(supported.includes(saved))initial=saved;}catch(_){}
