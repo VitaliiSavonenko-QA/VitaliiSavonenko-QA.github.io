@@ -459,11 +459,14 @@
  const elements=Array.from(doc.querySelectorAll("[data-i18n]"));
  const documents={"cv":["assets/Vitalii_Savonenko_CV_EN.pdf","assets/Vitalii_Savonenko_CV_RU.pdf","assets/Vitalii_Savonenko_CV_KO.pdf"],"bugs":["assets/bug-report-example_EN.pdf","assets/bug-report-example_RU.pdf","assets/bug-report-example_KO.pdf"],"mindmaps":["assets/Farming_Fever_MindMaps_EN.pdf","assets/Farming_Fever_MindMaps_RU.pdf","assets/Farming_Fever_MindMaps_KO.pdf"],"caseStudy":["assets/Game_QA_Case_Study_EN.pdf","assets/Game_QA_Case_Study_RU.pdf","assets/Game_QA_Case_Study_KO.pdf"]};
  const documentLinks=Array.from(doc.querySelectorAll("a[data-document]"));
+ const linkedInLink=doc.querySelector("a[data-linkedin-profile]");
+ const linkedInProfiles={"en":"https://www.linkedin.com/in/vitaliisavonenko-qa/?locale=en-US","ru":"https://www.linkedin.com/in/vitaliisavonenko-qa/ru","ko":"https://www.linkedin.com/in/vitaliisavonenko-qa/ko"};
  const attributes=["content","aria-label","alt"].flatMap(name=>Array.from(doc.querySelectorAll("[data-i18n-"+name+"]")).map(el=>({el,name,key:el.getAttribute("data-i18n-"+name)})));
  function apply(lang){if(!supported.includes(lang))lang="en";const i=indices[lang];
    elements.forEach(el=>{const row=rows[Number(el.getAttribute("data-i18n"))];if(row)el.textContent=row[i];});
    attributes.forEach(({el,name,key})=>{const row=rows[Number(key)];if(row)el.setAttribute(name,row[i]);});
    documentLinks.forEach(link=>{const files=documents[link.getAttribute("data-document")];if(files)link.setAttribute("href",files[i]);});
+   if(linkedInLink)linkedInLink.setAttribute("href",linkedInProfiles[lang]);
    doc.documentElement.lang=lang;buttons.forEach(button=>button.setAttribute("aria-pressed",String(button.getAttribute("data-lang")===lang)));return lang;
  }
  let initial="en";try{const saved=win.localStorage.getItem(storageKey);if(supported.includes(saved))initial=saved;}catch(_){}
