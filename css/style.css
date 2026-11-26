@@ -483,14 +483,21 @@ h1 {
 
 /* Animations */
 .reveal {
-  opacity: 0;
-  transform: translateY(24px);
+  opacity: 1;
+  transform: translateY(0);
   transition:
     opacity 700ms ease,
     transform 700ms ease;
 }
 
-.reveal.is-visible {
+/* Hide elements only after the animation observer is ready. */
+.reveal.reveal-pending {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.reveal.is-visible,
+.reveal.reveal-pending:focus-within {
   opacity: 1;
   transform: translateY(0);
 }
@@ -500,7 +507,8 @@ h1 {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal {
+  .reveal,
+  .reveal.reveal-pending {
     opacity: 1;
     transform: none;
     transition: none;
