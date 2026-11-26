@@ -288,8 +288,8 @@
   ],
   [
     "Open example →",
-    "Открыть пример (EN) →",
-    "사례 보기 (EN) →"
+    "Открыть пример →",
+    "사례 보기 →"
   ],
   [
     "Test Coverage Mind Maps",
@@ -457,7 +457,7 @@
  const buttons=Array.from(selector.querySelectorAll("button[data-lang]"));
  const supported=["en","ru","ko"],indices={en:0,ru:1,ko:2},storageKey="qa-portfolio-language";
  const elements=Array.from(doc.querySelectorAll("[data-i18n]"));
- const documents={"cv":["assets/Vitalii_Savonenko_CV_EN.pdf","assets/Vitalii_Savonenko_CV_RU.pdf","assets/Vitalii_Savonenko_CV_KO.pdf"]};
+ const documents={"cv":["assets/Vitalii_Savonenko_CV_EN.pdf","assets/Vitalii_Savonenko_CV_RU.pdf","assets/Vitalii_Savonenko_CV_KO.pdf"],"bugs":["assets/bug-report-example_EN.pdf","assets/bug-report-example_RU.pdf","assets/bug-report-example_KO.pdf"],"mindmaps":["assets/Farming_Fever_MindMaps_EN.pdf","assets/Farming_Fever_MindMaps_RU.pdf","assets/Farming_Fever_MindMaps_KO.pdf"],"caseStudy":["assets/Game_QA_Case_Study_EN.pdf","assets/Game_QA_Case_Study_RU.pdf","assets/Game_QA_Case_Study_KO.pdf"]};
  const documentLinks=Array.from(doc.querySelectorAll("a[data-document]"));
  const attributes=["content","aria-label","alt"].flatMap(name=>Array.from(doc.querySelectorAll("[data-i18n-"+name+"]")).map(el=>({el,name,key:el.getAttribute("data-i18n-"+name)})));
  function apply(lang){if(!supported.includes(lang))lang="en";const i=indices[lang];
